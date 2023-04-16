@@ -10,7 +10,7 @@ import {
     removeLoadingForSaveButtons
 } from "./view.js";
 
-import html2canvas from 'html2canvas';
+import html2canvas from 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/+esm'
 
 let selectedAutocompleteOptionNumber = -1;
 let autocompleteMAX = 10;
@@ -340,13 +340,19 @@ function setEventListeners() {
     });
 
     let downloadFromModalButton = document.getElementById("download-modal-form");
-    downloadFromModalButton.addEventListener("click", () => {
+    downloadFromModalButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        console.log(html2canvas);
         html2canvas(document.getElementById("modal-contact-list")).then(canvas => {
-            canvas.setAttribute("download",
+            let dlLink = document.createElement("a");
+            dlLink.href = canvas.toDataURL("image/png", 1.0);
+
+            dlLink.setAttribute("download",
                 (document.getElementById("modal-name").value + ".png" || "default.png")
             );
-            canvas.setAttribute("href", canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
-            canvas.click();
+            dlLink.click();
+            dlLink.remove();
         });
     })
 
