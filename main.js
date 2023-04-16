@@ -1,6 +1,34 @@
 let classList = ["IT-5", "IT-7"];
 let placeholderImagePath = "src/placeholder.png";
 
+function initPage(blockCount=10) {
+    initFormButton();
+    generateClassBlocks(blockCount);
+}
+
+function initFormButton() {
+    let form = document.getElementById("form");
+    let addActivityButton = document.getElementById("form-button");
+    addActivityButton.addEventListener("click", () => {
+       let newActivityDiv = document.createElement("div");
+
+       let timeFrom = document.createElement("input");
+       let timeTo = document.createElement("input");
+       timeFrom.type = "time";
+       timeTo.type = "time";
+
+       let activityName = document.createElement("input");
+       activityName.type = "text";
+       activityName.placeholder = "Activity Name";
+
+       newActivityDiv.appendChild(timeFrom);
+       newActivityDiv.appendChild(timeTo);
+       newActivityDiv.appendChild(activityName);
+
+       form.appendChild(newActivityDiv);
+    });
+}
+
 function generateClassBlocks(blocksCount) {
     let container = document.getElementById("container");
 
@@ -50,4 +78,4 @@ function fileExists(url) {
     return img.height !== 0;
 }
 
-export {generateClassBlocks, fileExists}
+export {initPage}

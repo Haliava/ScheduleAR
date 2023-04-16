@@ -2,7 +2,6 @@
     display: grid;
     justify-content: center;
     justify-items: center;
-    grid-template-rows: 1fr auto;
 }
 
 header {
@@ -58,4 +57,18 @@ header h1 {
     z-index: -1;
     transform: translateZ(-5px) scale(1.5);
     background-size: cover;
+}
+
+.data-row {
+    display: flex;
+}
+
+@media (max-device-width: 500px) {
+    #container {
+        width: 100%;
+    }
+
+    #main-container {
+        grid-template-columns: 1fr;
+    }
 }
